@@ -1,0 +1,22 @@
+Parameters: 
+    EnvironmentType: 
+      Description: The environment type
+      Type: String
+      Default: test
+      AllowedValues: 
+        - prod
+        - test
+      ConstraintDescription: must be a prod or test
+  Mappings: 
+    RegionAndInstanceTypeToAMIID: 
+      us-east-1: 
+        test: "ami-8ff710e2"
+        prod: "ami-f5f41398"
+      us-west-2: 
+        test: "ami-eff1028f"
+        prod: "ami-d0f506b0"
+Resources:
+  MyInstance:
+    Type: AWS::EC2::Instance
+    Properties: 
+      ImageId: !FindInMap [RegionAndInstanceTypeToAMIID, !Ref "AWS::us-east-1", !Ref EnvironmentType]

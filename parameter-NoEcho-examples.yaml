@@ -1,0 +1,17 @@
+Parameters:
+  DBPassword:
+    Description: The database admin password
+    Type: String
+    NoEcho: true
+    
+
+Resources:
+  MyDBInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceClass: db.t2.micro
+      AllocatedStorage: 20
+      Engine: mysql
+      MasterUsername: admin
+      MasterUserPassword: !Ref DBPassword
+      DBInstanceIdentifier: mydbinstance
